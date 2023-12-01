@@ -3,11 +3,28 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const userRoute = require("./routes/userRoute") 
 
 
 const app = express()
 
-const PORT= process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
+
+
+//Middlewares
+
+app.use(express.json()) //Para manejar archivos .json en la aplicacion
+app.use(express.urlencoded({extended:false})) // Para handle data que viene via URL
+app.use(bodyParser.json())
+
+//Routes Middleware
+app.use("/api/users", userRoute)
+
+//Routes
+
+app.get("/", (req, res)=>{
+    res.send("Hola Danito")
+})
 
 //Conect to DataBase and start server
 mongoose

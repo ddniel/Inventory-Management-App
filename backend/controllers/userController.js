@@ -1,5 +1,12 @@
 const asyncHandler = require("express-async-handler")
 const User = require("../models/userModel")
+const jwt = require("jsonwebtoken")
+
+
+const generateToken = (id) => {
+    return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1d"})
+}
+
 
 const registerUser = asyncHandler(async(req, res) => { // Async handler es un package que instalas para no tener que usar try an catch cuando usas async
     
@@ -24,6 +31,9 @@ const registerUser = asyncHandler(async(req, res) => { // Async handler es un pa
         throw new Error("Email has already been registed")
     }
 
+    
+
+
     // Create new user
     const user = await User.create({
         name,
@@ -31,10 +41,13 @@ const registerUser = asyncHandler(async(req, res) => { // Async handler es un pa
         password
     })
 
+    //Generate token
+    const token = generateToken(user._id)
+
     if (user){
         const {_id, name, email, photo, phone, bio} = user
         res.status(201).json({
-            _id, name, email, photo, phone, bio
+            _id, name, email, photo, phone, bio, token,
 
         })
     }else{

@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const userRoute = require("./routes/userRoute") 
 const errorHandler = require("./middleWare/errorMiddleware")
+const cookieParser = require("cookie-parser")
 
 
 const app = express()
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json()) //Para manejar archivos .json en la aplicacion
 app.use(express.urlencoded({extended:false})) // Para handle data que viene via URL
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 //Routes Middleware
 app.use("/api/users", userRoute)

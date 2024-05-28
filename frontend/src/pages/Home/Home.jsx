@@ -3,6 +3,8 @@ import features from "/features.png"
 import { Link } from 'react-router-dom'
 import Button from '../../components/Button'
 import Footer from "../../components/LandingFooter"
+import { ShowOnLogin, ShowOnLogout } from "../../components/HiddenLinks"
+
 
 
 
@@ -16,17 +18,26 @@ export const Home = () => {
             <h1 className="md:text-xl font-medium pl-2">Inventory Manager</h1>
           </div>
           <ul className="flex flex-row items-center gap-2">
-            <li>
-              <Link to="/register" className="font-medium text-sm cursor-pointer">
-                Register
-              </Link>
-            </li>
-            <li>
-                <Link to="/login"><Button>Login</Button></Link>
-            </li>
-            <li>
-                <Link to="/dashboard"><Button>Dashboard</Button></Link>
-            </li>
+            <ShowOnLogout>
+              <li>
+                <Link to="/register" className="font-medium text-sm cursor-pointer">
+                  Register
+                </Link>
+              </li>
+            </ShowOnLogout>
+            
+            <ShowOnLogout>
+              <li>
+                  <Link to="/login"><Button>Login</Button></Link>
+              </li>
+            </ShowOnLogout>
+            
+            <ShowOnLogin>
+              <li>
+                  <Link to="/dashboard"><Button>Dashboard</Button></Link>
+              </li>
+            </ShowOnLogin>
+            
           </ul>
         </nav>
 

@@ -22,7 +22,11 @@ app.use(express.json()) //Para manejar archivos .json en la aplicacion
 app.use(express.urlencoded({extended:false})) // Para handle data que viene via URL
 app.use(bodyParser.json())
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({
+    origin: ["http://localhost:5173", "https://inventory-manager.vercel.app"],
+    credentials: true
+
+}))
 
 app.use("/uploads", express.static(path.join(__dirname, 'uploads')))
 

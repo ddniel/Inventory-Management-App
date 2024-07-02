@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home/Home';
 import Login from './pages/auth/Login'
@@ -13,6 +12,9 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getLoginStatus } from './services/authService';
 import { SET_LOGIN } from './redux/features/auth/authSlice';
+import AddProduct from './pages/AddProduct';
+
+
 
 axios.defaults.withCredentials = true
 
@@ -38,6 +40,7 @@ function App() {
         <Route path='/forgot' element={<Forgot/>}/>
         <Route path='/resetpassword/:resetToken' element={<Reset/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path='/add-product' element={<AddProduct/>}/>
       </Routes>
     </BrowserRouter>
   );

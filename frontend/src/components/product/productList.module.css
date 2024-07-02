@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+  font-family: inherit;
+}
+
+th {
+  font-weight: 300;
+}
+
+th,
+td {
+  border: solid 2px #f8f9fb;
+  padding: 6px 8px;
+}
+
+tr:hover {
+  background-color: rgba(156, 186, 250, 0.146);
+}
+
+thead {
+  background-color: #f8f9fb;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: rgb(60, 118, 244);
+}

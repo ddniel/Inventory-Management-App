@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        @apply bg-gray-200;
-        @apply font-poppins;
-    }
+  html {
+    @apply bg-white;
+    @apply font-poppins;
+  }
 }

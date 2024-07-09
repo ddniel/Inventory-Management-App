@@ -1,8 +1,19 @@
 import { SpinnerImg } from "../Loader";
 import { FaEye, FaRegEdit, FaTrash } from "react-icons/fa";
 import styles from "./productList.module.css";
+import Search from "../Search";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  FILTER_PRODUCTS,
+  selectFilteredProducts,
+} from "../../redux/features/products/filterSlice";
 
 export default function ProductList({ products, isLoading }) {
+  const [search, setSearch] = useState("");
+  const filteredProducts = useSelector(selectFilteredProducts);
+  const dispatch = useDispatch();
+
   const shortenText = (text, n) => {
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat("...");
@@ -11,13 +22,17 @@ export default function ProductList({ products, isLoading }) {
     return text;
   };
 
+  useEffect(() => {
+    dispatch(FILTER_PRODUCTS({ products, search }));
+  }, [products, search, dispatch]);
+
   return (
     <div>
       <hr />
       <div>
         <div>
           <h3>Inventory Items</h3>
-          <input type="text" />
+          <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
         {isLoading && <SpinnerImg />}
 
@@ -38,19 +53,19 @@ export default function ProductList({ products, isLoading }) {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product, index) => {
+                {filteredProducts.map((product, index) => {
                   const { _id, name, category, price, quantity } = product;
                   return (
                     <tr key={_id}>
                       <td>{index + 1}</td>
                       <td>{shortenText(name, 16)}</td>
                       <td>{category}</td>
-                      <td>
+                      <td className={styles.price}>
                         {"$"}
                         {price}
                       </td>
-                      <td>{quantity}</td>
-                      <td>
+                      <td className={styles.quantity}>{quantity}</td>
+                      <td className={styles.value}>
                         {"$"}
                         {price * quantity}
                       </td>

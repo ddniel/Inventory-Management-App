@@ -21,6 +21,12 @@ thead {
   background-color: #f8f9fb;
 }
 
+.price,
+.quantity,
+.value {
+  text-align: right;
+}
+
 .action {
   display: flex;
   align-items: center;

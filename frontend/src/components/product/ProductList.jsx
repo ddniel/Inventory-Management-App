@@ -10,6 +10,7 @@ import {
 } from "../../redux/features/products/filterSlice";
 import ReactPaginate from "react-paginate";
 
+// eslint-disable-next-line react/prop-types
 export default function ProductList({ products, isLoading }) {
   const [search, setSearch] = useState("");
   const filteredProducts = useSelector(selectFilteredProducts);
@@ -48,15 +49,15 @@ export default function ProductList({ products, isLoading }) {
   return (
     <div>
       <hr />
-      <div>
+      <div className={styles.mainContainer}>
         <div>
           <h3>Inventory Items</h3>
-          <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         </div>
+        <Search value={search} onChange={(e) => setSearch(e.target.value)} />
         {isLoading && <SpinnerImg />}
 
         <div className={styles.tableContainer}>
-          {!isLoading && products.length === 0 ? (
+          {!isLoading && filteredProducts.length === 0 ? (
             <p>No products to display.</p>
           ) : (
             <table className={styles.table}>
@@ -104,12 +105,17 @@ export default function ProductList({ products, isLoading }) {
         </div>
         <ReactPaginate
           breakLabel="..."
-          nextLabel="NEXT"
+          nextLabel=">"
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
           pageCount={pageCount}
-          previousLabel="PREVIOUS"
+          previousLabel="<"
           renderOnZeroPageCount={null}
+          containerClassName={styles.paginationContainer}
+          pageLinkClassName={styles.pageLinks}
+          nextLinkClassName={styles.next}
+          previousLinkClassName={styles.prev}
+          activeLinkClassName={styles.activePage}
         />
       </div>
     </div>

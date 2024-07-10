@@ -3,6 +3,12 @@ table {
   font-family: inherit;
 }
 
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 th {
   font-weight: 300;
 }
@@ -33,4 +39,43 @@ thead {
   justify-content: center;
   gap: 6px;
   color: rgb(60, 118, 244);
+}
+
+/* Pagination */
+
+.paginationContainer {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.pageLinks {
+  border: solid 2px #f8f9fb;
+  border-radius: 20px;
+  padding: 4px 18px;
+}
+
+.pageLinks:hover {
+  background-color: rgb(60, 118, 244);
+  border-color: rgb(60, 118, 244);
+  color: white;
+}
+
+.activePage {
+  background-color: rgb(60, 118, 244);
+  border-color: rgb(60, 118, 244);
+  color: white;
+}
+
+.next,
+.prev {
+  border-radius: 20px;
+  padding: 3px 14px;
+}
+
+.next:hover,
+.prev:hover {
+  background-color: rgb(60, 118, 244);
+  color: white;
 }

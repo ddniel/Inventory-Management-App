@@ -8,6 +8,7 @@ import {
   FILTER_PRODUCTS,
   selectFilteredProducts,
 } from "../../redux/features/products/filterSlice";
+import ReactPaginate from "react-paginate";
 
 export default function ProductList({ products, isLoading }) {
   const [search, setSearch] = useState("");
@@ -21,6 +22,24 @@ export default function ProductList({ products, isLoading }) {
     }
     return text;
   };
+
+  //-------------Pagination
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 2;
+
+  // Simulate fetching items from another resources.
+  // (This could be items from props; or items loaded in a local state
+  // from an API endpoint with useEffect and useState)
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = filteredProducts.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % filteredProducts.length;
+    setItemOffset(newOffset);
+  };
+  //----------End Pagination
 
   useEffect(() => {
     dispatch(FILTER_PRODUCTS({ products, search }));
@@ -53,7 +72,7 @@ export default function ProductList({ products, isLoading }) {
                 </tr>
               </thead>
               <tbody>
-                {filteredProducts.map((product, index) => {
+                {currentItems.map((product, index) => {
                   const { _id, name, category, price, quantity } = product;
                   return (
                     <tr key={_id}>
@@ -83,6 +102,15 @@ export default function ProductList({ products, isLoading }) {
             </table>
           )}
         </div>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="NEXT"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel="PREVIOUS"
+          renderOnZeroPageCount={null}
+        />
       </div>
     </div>
   );

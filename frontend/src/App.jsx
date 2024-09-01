@@ -17,6 +17,7 @@ import ProductDetails from "./components/product/ProductDetails";
 import EditProduct from "./components/product/EditProduct";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import Contact from "./pages/Contact";
 
 axios.defaults.withCredentials = true;
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/contact-us" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );

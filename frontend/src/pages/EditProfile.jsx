@@ -7,6 +7,7 @@ import Loader, { SpinnerImg } from "../components/Loader";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { updateUser } from "../services/authService";
+import ChangePassword from "../components/ChangePassword";
 
 export default function EditProfile() {
   const [isLoading, setIsLoading] = useState(false);
@@ -101,15 +102,21 @@ export default function EditProfile() {
           {!isLoading && profile === null ? (
             <p>Something went wrong, please reload...</p>
           ) : (
-            <div className="w-full bg-slate-50 py-10 px-8 rounded-md shadow-md flex flex-row">
-              <form onSubmit={saveProfile}>
+            <div className="w-full bg-slate-50 py-10 px-8 rounded-md shadow-md">
+              <form onSubmit={saveProfile} className="w-1/2">
                 <div className="flex flex-col gap-1">
+                  <div className="mb-6">
+                    <span>
+                      <img src={user?.photo} alt="profile picture" />
+                    </span>
+                  </div>
                   <label>Name: </label>
                   <input
                     type="text"
                     name="name"
                     value={profile?.name}
                     onChange={handleInputChange}
+                    className=" rounded-sm px-2 py-1"
                   />
 
                   <label>Email: </label>
@@ -119,6 +126,7 @@ export default function EditProfile() {
                     value={profile?.email}
                     onChange={handleInputChange}
                     disabled
+                    className=" rounded-sm px-2 py-1"
                   />
 
                   <label>Phone: </label>
@@ -127,6 +135,7 @@ export default function EditProfile() {
                     name="phone"
                     value={profile?.phone}
                     onChange={handleInputChange}
+                    className=" rounded-sm px-2 py-1"
                   />
 
                   <label>Bio: </label>
@@ -136,6 +145,7 @@ export default function EditProfile() {
                     onChange={handleInputChange}
                     cols={30}
                     rows={10}
+                    className="rounded-sm px-2 py-1"
                   />
 
                   <label>Photo: </label>
@@ -149,13 +159,9 @@ export default function EditProfile() {
                   Save
                 </button>
               </form>
-              <div className="ml-20">
-                <span>
-                  <img src={user?.photo} alt="profile picture" />
-                </span>
-              </div>
             </div>
           )}
+          <ChangePassword />
         </>
       </Layout>
     </section>

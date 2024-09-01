@@ -174,3 +174,24 @@ export const updateUser = async (formData) => {
     toast.error(message);
   }
 };
+
+//Change Password
+
+export const changePassword = async (formData) => {
+  try {
+    const response = await axios.patch(
+      `${BACKEND_URL}/api/users/changepassword`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.msg &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    toast.error(message);
+  }
+};

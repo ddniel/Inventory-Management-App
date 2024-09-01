@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/auth/authSlice";
 import SideBar from "../components/SideBar";
 import Layout from "../components/Layout";
-import { SpinnerImg } from "../components/Loader";
-import { Link } from "react-router-dom";
+import Loader, { SpinnerImg } from "../components/Loader";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { updateUser } from "../services/authService";
 
 export default function EditProfile() {
   const [isLoading, setIsLoading] = useState(false);
   const user = useSelector(selectUser);
+  const navigate = useNavigate();
+
+  const { email } = user;
+
+  useEffect(() => {
+    // Send user to profile page if refreshes the page, because redux data gets lost if so.
+    if (!email) {
+      navigate("/profile");
+    }
+  }, [email, navigate]);
 
   const initialState = {
     name: user?.name,
@@ -30,8 +42,53 @@ export default function EditProfile() {
     setProfileImg(e.target.files[0]);
   };
 
-  const saveProfile = (e) => {
+  const saveProfile = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    try {
+      //Image upload
+
+      let imageURL;
+      if (
+        profileImg &&
+        (profileImg.type === "image/jpeg" ||
+          profileImg.type === "image/jpg" ||
+          profileImg.type === "image/png")
+      ) {
+        const image = new FormData();
+        image.append("file", profileImg);
+        image.append("cloud_name");
+        image.append("upload_preset");
+
+        //Save img to cloudinary
+        const response = await fetch(
+          "https://api/cloudinary.com/v1_1/username/image/upload",
+          { method: "post", body: image }
+        );
+
+        const imgData = await response.json();
+        imageURL = imgData.url.toString();
+      }
+
+      //Save Profile
+      const formData = {
+        name: profile.name,
+        phone: profile.phone,
+        bio: profile.bio,
+        photo: profileImg ? imageURL : profile.photo,
+      };
+
+      await updateUser(formData);
+
+      toast.success("User updated");
+
+      setIsLoading(false);
+      navigate("/profile");
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -39,7 +96,7 @@ export default function EditProfile() {
       <SideBar />
       <Layout>
         <h3>Edit Profile</h3>
-        {isLoading && <SpinnerImg />}
+        {isLoading && <Loader />}
         <>
           {!isLoading && profile === null ? (
             <p>Something went wrong, please reload...</p>

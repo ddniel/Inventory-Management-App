@@ -153,3 +153,24 @@ export const getUser = async () => {
     toast.error(message);
   }
 };
+
+//Update User
+
+export const updateUser = async (formData) => {
+  try {
+    const response = await axios.patch(
+      `${BACKEND_URL}/api/users/updateuser`,
+      formData
+    );
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.msg &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    toast.error(message);
+  }
+};

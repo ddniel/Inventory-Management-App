@@ -6,6 +6,7 @@ import { selectIsLoggedIn } from "../redux/features/auth/authSlice";
 import { useEffect } from "react";
 import ProductList from "../components/product/ProductList";
 import { getProducts } from "../redux/features/products/productSlice";
+import ProductSummary from "../components/product/ProductSummary";
 
 export default function Dashboard() {
   useRedirectLoggedOutUser("/login");
@@ -31,6 +32,7 @@ export default function Dashboard() {
     <section className="w-full min-h-screen flex">
       <SideBar />
       <Layout>
+        <ProductSummary products={products} />
         <ProductList products={products} isLoading={isLoading} />
       </Layout>
     </section>

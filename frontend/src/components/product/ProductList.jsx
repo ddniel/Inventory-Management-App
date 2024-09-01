@@ -9,10 +9,18 @@ import {
   selectFilteredProducts,
 } from "../../redux/features/products/filterSlice";
 import ReactPaginate from "react-paginate";
+import {
+  deleteProduct,
+  getProducts,
+} from "../../redux/features/products/productSlice";
+import ConfirmationModal from "./ConfirmationModal";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export default function ProductList({ products, isLoading }) {
   const [search, setSearch] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [productToDelete, setproductToDelete] = useState(null);
   const filteredProducts = useSelector(selectFilteredProducts);
   const dispatch = useDispatch();
 
@@ -45,6 +53,24 @@ export default function ProductList({ products, isLoading }) {
   useEffect(() => {
     dispatch(FILTER_PRODUCTS({ products, search }));
   }, [products, search, dispatch]);
+
+  // Handle delete icon click
+  const handleDeleteClick = (pid) => {
+    setproductToDelete(pid);
+    setIsModalOpen(true);
+  };
+
+  // Handle modal confirm button click
+  const handleConfirmDelete = () => {
+    dispatch(deleteProduct(productToDelete));
+    dispatch(getProducts());
+    setIsModalOpen(false);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setproductToDelete(null);
+  };
 
   return (
     <div>
@@ -91,9 +117,17 @@ export default function ProductList({ products, isLoading }) {
                       </td>
                       <td>
                         <span className={styles.action}>
-                          <FaEye size={20} />
-                          <FaRegEdit size={20} />
-                          <FaTrash size={20} />
+                          <Link to={`/product-details/${_id}`}>
+                            <FaEye size={20} className="cursor-pointer" />
+                          </Link>
+                          <Link to={`/edit-product/${_id}`}>
+                            <FaRegEdit size={20} className="cursor-pointer" />
+                          </Link>
+                          <FaTrash
+                            size={20}
+                            onClick={() => handleDeleteClick(_id)}
+                            className="cursor-pointer"
+                          />
                         </span>
                       </td>
                     </tr>
@@ -118,6 +152,12 @@ export default function ProductList({ products, isLoading }) {
           activeLinkClassName={styles.activePage}
         />
       </div>
+
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 }

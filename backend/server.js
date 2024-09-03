@@ -24,7 +24,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://inventory-management-ixnby2a7a-dannys-projects-47c441c7.vercel.app",
+      "https://inventory-management-app-sand.vercel.app",
     ],
     credentials: true,
   })

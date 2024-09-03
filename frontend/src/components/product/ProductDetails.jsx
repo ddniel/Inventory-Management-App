@@ -57,7 +57,7 @@ export default function ProductDetails() {
               )}
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 ml-10">
               <h4 className="text-xl font-medium">{product.name}</h4>
               <hr />
               <h4>{stockStatus(product.quantity)}</h4>

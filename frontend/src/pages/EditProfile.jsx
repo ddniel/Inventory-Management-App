@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/auth/authSlice";
 import SideBar from "../components/SideBar";
 import Layout from "../components/Layout";
-import Loader, { SpinnerImg } from "../components/Loader";
-import { Link, useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 import { toast } from "react-toastify";
 import { updateUser } from "../services/authService";
 import ChangePassword from "../components/ChangePassword";
+import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,14 +58,13 @@ export default function EditProfile() {
       ) {
         const image = new FormData();
         image.append("file", profileImg);
-        image.append("cloud_name");
-        image.append("upload_preset");
-
+        image.append("cloud_name", import.meta.env.VITE_CLOUD_NAME);
+        image.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
         //Save img to cloudinary
-        const response = await fetch(
-          "https://api/cloudinary.com/v1_1/username/image/upload",
-          { method: "post", body: image }
-        );
+        const response = await fetch(import.meta.env.VITE_CLOUDINARY_URL, {
+          method: "post",
+          body: image,
+        });
 
         const imgData = await response.json();
         imageURL = imgData.url.toString();

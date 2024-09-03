@@ -6,7 +6,6 @@ import Layout from "../Layout";
 import { selectIsLoggedIn } from "../../redux/features/auth/authSlice";
 import { useEffect } from "react";
 import { getProduct } from "../../redux/features/products/productSlice";
-import DOMPurify from "dompurify";
 
 import Loader from "../Loader";
 
@@ -81,11 +80,7 @@ export default function ProductDetails() {
                 <p className="mt-2">
                   <strong>Description: </strong>
                 </p>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(product.description),
-                  }}
-                ></div>
+                <div>{product.description}</div>
               </div>
               <div className="text-xs text-gray-500 mt-4">
                 <hr className="mb-2" />

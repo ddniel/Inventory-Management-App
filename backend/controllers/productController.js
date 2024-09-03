@@ -36,7 +36,7 @@ const createProduct = asyncHandler(async (req, res) => {
     };
   }
 
-  //Create products
+  //Create product
   const product = await Product.create({
     user: req.user.id,
     name,

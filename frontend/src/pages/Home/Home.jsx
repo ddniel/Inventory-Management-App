@@ -1,12 +1,9 @@
-import logo from "/logo.png"
-import features from "/features.png"
-import { Link } from 'react-router-dom'
-import Button from '../../components/Button'
-import Footer from "../../components/LandingFooter"
-import { ShowOnLogin, ShowOnLogout } from "../../components/HiddenLinks"
-
-
-
+import logo from "/logo.png";
+import features from "/features.png";
+import { Link } from "react-router-dom";
+import Button from "../../components/Button";
+import Footer from "../../components/LandingFooter";
+import { ShowOnLogin, ShowOnLogout } from "../../components/HiddenLinks";
 
 export const Home = () => {
   return (
@@ -20,24 +17,30 @@ export const Home = () => {
           <ul className="flex flex-row items-center gap-2">
             <ShowOnLogout>
               <li>
-                <Link to="/register" className="font-medium text-sm cursor-pointer">
+                <Link
+                  to="/register"
+                  className="font-medium text-sm cursor-pointer"
+                >
                   Register
                 </Link>
               </li>
             </ShowOnLogout>
-            
+
             <ShowOnLogout>
               <li>
-                  <Link to="/login"><Button>Login</Button></Link>
+                <Link to="/login">
+                  <Button>Login</Button>
+                </Link>
               </li>
             </ShowOnLogout>
-            
+
             <ShowOnLogin>
               <li>
-                  <Link to="/dashboard"><Button>Dashboard</Button></Link>
+                <Link to="/dashboard">
+                  <Button>Dashboard</Button>
+                </Link>
               </li>
             </ShowOnLogin>
-            
           </ul>
         </nav>
 
@@ -46,21 +49,26 @@ export const Home = () => {
         <div className="flex flex-col mt-14 items-center text-center h-5/6 gap-20 lg:flex-row lg:text-left">
           <div>
             <h3 className="text-gray-500 pl-5">- Free 30 days trial</h3>
-            <h1 className="text-4xl md:text-7xl">Handle your inventory like a Pro.</h1>
+            <h1 className="text-4xl md:text-7xl">
+              Handle your inventory like a Pro.
+            </h1>
             <p className="text-gray-700 text-sm py-8">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Recusandae, iste? Voluptatum labore, atque minima rerum
               accusantium laborum dolores optio nulla exercitationem suscipit
               dicta? Eos ipsam reiciendis quam, consequatur sit voluptates!
             </p>
-            <Link to="/login"><Button>Login</Button></Link>
+            <ShowOnLogout>
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
+            </ShowOnLogout>
           </div>
 
           <div>
             <img className="mt-10 md:max-w-2xl" src={features} alt="" />
           </div>
         </div>
-        
       </div>
       <Footer />
     </section>

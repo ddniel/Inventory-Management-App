@@ -42,6 +42,7 @@ export const loginUser = async (userData) => {
       `${BACKEND_URL}/api/users/login`,
       userData
     );
+    console.log("rspuesta de login: ", response.statusText);
     if (response.statusText === "OK") {
       toast.success("Login Succesful...");
       console.log("token que llega: ", response.data.token);

@@ -24,7 +24,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://inventory-management-app-sand.vercel.app",
+      "https://inventory-management-app-s4r6.onrender.com",
     ],
     credentials: true,
   })

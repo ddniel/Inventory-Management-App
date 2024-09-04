@@ -24,6 +24,7 @@ app.use(
       "https://inventory-management-app-s4r6.onrender.com",
       "http://localhost:5173",
     ],
+    credentials: true,
   })
 );
 

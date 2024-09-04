@@ -15,11 +15,11 @@ export const registerUser = async (userData) => {
   try {
     const response = await axios.post(
       `${BACKEND_URL}/api/users/register`,
-      userData,
-      { withCredentials: true }
+      userData
     );
     if (response.statusText === "OK") {
       toast.success("User Registered succesfully");
+      localStorage.setItem("token", response.data.token);
     }
     return response.data;
   } catch (error) {
@@ -40,11 +40,11 @@ export const loginUser = async (userData) => {
   try {
     const response = await axios.post(
       `${BACKEND_URL}/api/users/login`,
-      userData,
-      { withCredentials: true }
+      userData
     );
     if (response.statusText === "OK") {
       toast.success("Login Succesful...");
+      localStorage.setItem("token", response.data.token);
     }
     return response.data;
   } catch (error) {
@@ -64,6 +64,7 @@ export const loginUser = async (userData) => {
 export const logoutUser = async () => {
   try {
     await axios.get(`${BACKEND_URL}/api/users/logout`);
+    localStorage.removeItem("token");
   } catch (error) {
     const message =
       (error.response &&
@@ -118,20 +119,21 @@ export const resetPassword = async (userData, resetToken) => {
   }
 };
 
-//Get Login status
-
+// Get Login status
 export const getLoginStatus = async () => {
   try {
+    const token = localStorage.getItem("token");
+
     const response = await axios.get(`${BACKEND_URL}/api/users/loggedin`, {
-      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
+
     return response.data;
   } catch (error) {
     const message =
-      (error.response &&
-        error.response.data &&
-        error.response.data.msg &&
-        error.response.data.message) ||
+      (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
     toast.error(message);
@@ -142,7 +144,12 @@ export const getLoginStatus = async () => {
 
 export const getUser = async () => {
   try {
-    const response = await axios.get(`${BACKEND_URL}/api/users/getuser`);
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${BACKEND_URL}/api/users/getuser`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     const message =
@@ -160,9 +167,15 @@ export const getUser = async () => {
 
 export const updateUser = async (formData) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await axios.patch(
       `${BACKEND_URL}/api/users/updateuser`,
-      formData
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -181,9 +194,15 @@ export const updateUser = async (formData) => {
 
 export const changePassword = async (formData) => {
   try {
+    const token = localStorage.getItem("token");
     const response = await axios.patch(
       `${BACKEND_URL}/api/users/changepassword`,
-      formData
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return response.data;
   } catch (error) {

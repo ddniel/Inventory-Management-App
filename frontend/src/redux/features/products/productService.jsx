@@ -4,38 +4,67 @@ export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const API_URL = `${BACKEND_URL}/api/products/`;
 
+const getToken = () => {
+  return localStorage.getItem("token");
+};
+
 //Create New Product
 
 const createProduct = async (formData) => {
-  const response = await axios.post(API_URL, formData);
+  const token = getToken();
+  const response = await axios.post(API_URL, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
 //Get all products
 
 const getProducts = async () => {
-  const response = await axios.get(API_URL);
+  const token = getToken();
+  const response = await axios.get(API_URL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
 //Delete a product
 
 const deleteProduct = async (id) => {
-  const response = await axios.delete(API_URL + id);
+  const token = getToken();
+  const response = await axios.delete(API_URL + id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
 //Get a product
 
 const getProduct = async (id) => {
-  const response = await axios.get(API_URL + id);
+  const token = getToken();
+  const response = await axios.get(API_URL + id, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
 //Update product
 
 const updateProduct = async (id, formData) => {
-  const response = await axios.patch(`${API_URL}${id}`, formData);
+  const token = getToken();
+  const response = await axios.patch(`${API_URL}${id}`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 

@@ -132,6 +132,7 @@ const logout = asyncHandler(async (req, res) => {
     expires: new Date(0), //now
     sameSite: "none",
     secure: true,
+    partitioned: true,
   });
 
   return res.status(200).json({ msg: "Succesfully logged out" });

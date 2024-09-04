@@ -11,20 +11,29 @@ import { FaLocationDot } from "react-icons/fa6";
 export default function Contact() {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const data = {
     subject,
     message,
   };
 
   const sendEmail = async (e) => {
+    setIsSubmitting(true);
     e.preventDefault();
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/contactus`, data);
+      const token = localStorage.getItem("token");
+      const response = await axios.post(`${BACKEND_URL}/api/contactus`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setSubject("");
       setMessage("");
       toast.success(response.data.message);
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -54,8 +63,15 @@ export default function Contact() {
               cols={30}
               className=" rounded-sm px-2 py-1 border-2"
             />
-            <button className="w-20 bg-blue-600 text-white font-medium text-sm rounded-lg px-2.5 py-2 cursor-pointer hover:bg-blue-500 tracking-wide my-4">
-              Send
+            <button
+              type="submit"
+              className={`w-20 bg-blue-600 text-white font-medium text-sm rounded-lg px-2.5 py-2 cursor-pointer hover:bg-blue-500 tracking-wide my-4 ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={isSubmitting} // <-- Disable the button while submitting
+            >
+              {isSubmitting ? "Sending..." : "Send"}{" "}
+              {/* <-- Button text changes */}
             </button>
           </form>
           <div className="ml-10">

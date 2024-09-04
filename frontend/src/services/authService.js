@@ -42,10 +42,9 @@ export const loginUser = async (userData) => {
       `${BACKEND_URL}/api/users/login`,
       userData
     );
-    console.log("rspuesta de login: ", response.data);
 
     toast.success("Login Succesful...");
-    console.log("token que llega: ", response.data.token);
+
     localStorage.setItem("token", response.data.token);
     return response.data;
   } catch (error) {
@@ -130,7 +129,6 @@ export const getLoginStatus = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Is logged in? ", response.data, "token ", token);
     return response.data;
   } catch (error) {
     const message =

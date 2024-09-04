@@ -129,7 +129,7 @@ export const getLoginStatus = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("Is logged in? ", response.data);
+    console.log("Is logged in? ", response.data, "token ", token);
     return response.data;
   } catch (error) {
     const message =

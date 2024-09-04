@@ -5,7 +5,6 @@ import Reset from "./pages/auth/Reset";
 import Forgot from "./pages/auth/Forgot";
 import Register from "./pages/auth/Register";
 import Dashboard from "./pages/Dashboard";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
@@ -18,8 +17,6 @@ import EditProduct from "./components/product/EditProduct";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Contact from "./pages/Contact";
-
-axios.defaults.withCredentials = true;
 
 function App() {
   const dispatch = useDispatch();

@@ -44,6 +44,7 @@ export const loginUser = async (userData) => {
     );
     if (response.statusText === "OK") {
       toast.success("Login Succesful...");
+      console.log("token que llega: ", response.data.token);
       localStorage.setItem("token", response.data.token);
     }
     return response.data;

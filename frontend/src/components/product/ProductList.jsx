@@ -34,7 +34,7 @@ export default function ProductList({ products, isLoading }) {
 
   //-------------Pagination
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 2;
+  const itemsPerPage = 5;
 
   // Simulate fetching items from another resources.
   // (This could be items from props; or items loaded in a local state

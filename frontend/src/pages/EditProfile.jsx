@@ -102,7 +102,7 @@ export default function EditProfile() {
             <p>Something went wrong, please reload...</p>
           ) : (
             <div className="w-full bg-slate-50 py-10 px-8 rounded-md shadow-md">
-              <form onSubmit={saveProfile} className="w-1/2">
+              <form onSubmit={saveProfile} className="sm:w-1/2">
                 <div className="flex flex-col gap-1">
                   <div className="mb-6">
                     <span>

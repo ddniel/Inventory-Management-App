@@ -1,6 +1,7 @@
 table {
   width: 100%;
   font-family: inherit;
+  overflow-x: auto;
 }
 
 .mainContainer {
@@ -78,4 +79,8 @@ thead {
 .prev:hover {
   background-color: rgb(60, 118, 244);
   color: white;
+}
+
+.tableContainer {
+  overflow-x: scroll;
 }

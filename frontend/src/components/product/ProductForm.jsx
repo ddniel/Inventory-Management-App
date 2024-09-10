@@ -15,9 +15,12 @@ export default function ProductForm({
 }) {
   return (
     <div className="bg-gray-80 rounded-lg px-6 py-6 mb-4">
-      <form className="flex gap-10" onSubmit={saveProduct}>
+      <form
+        className="flex sm:flex-row gap-10 flex-col-reverse"
+        onSubmit={saveProduct}
+      >
         <div className="flex flex-col gap-2">
-          <div className="flex justify-between pr-14">
+          <div className="flex flex-col sm:flex-row sm:justify-between pr-14">
             <label htmlFor="">Product Name</label>
             <input
               type="text"
@@ -27,7 +30,7 @@ export default function ProductForm({
               className="bg-blue-100 rounded-sm px-2 py-1"
             />
           </div>
-          <div className="flex justify-between pr-14">
+          <div className="flex flex-col sm:flex-row sm:justify-between pr-14">
             <label htmlFor="">Product Category</label>
             <input
               type="text"
@@ -37,7 +40,7 @@ export default function ProductForm({
               className="bg-blue-100 rounded-sm px-2 py-1"
             />
           </div>
-          <div className="flex justify-between pr-14">
+          <div className="flex flex-col sm:flex-row sm:justify-between pr-14">
             <label htmlFor="">Product Price</label>
             <input
               type="text"
@@ -47,7 +50,7 @@ export default function ProductForm({
               className="bg-blue-100 rounded-sm px-2 py-1"
             />
           </div>
-          <div className="flex justify-between pr-14">
+          <div className="flex flex-col sm:flex-row sm:justify-between pr-14">
             <label htmlFor="">Product Quantity</label>
             <input
               type="text"
@@ -66,7 +69,7 @@ export default function ProductForm({
               onChange={setDescription}
               modules={ProductForm.modules}
               formats={ProductForm.formats}
-              className="bg-blue-100 w-[550px] h-[300px] overflow-scroll"
+              className="bg-blue-100 w-full sm:w-[550px] h-[300px] overflow-scroll"
             />
           </div>
 
@@ -92,7 +95,7 @@ export default function ProductForm({
             onChange={(e) => handleImageChange(e)}
           />
           <br />
-          <div className="flex w-[300px] h-[300px] overflow-auto items-center justify-center border-gray-400 border-dashed border-2">
+          <div className="flex w-full sm:w-[300px] h-[300px] overflow-auto items-center justify-center border-gray-400 border-dashed border-2">
             {imagePreview != null ? (
               <img src={imagePreview} alt="Product Image" />
             ) : (

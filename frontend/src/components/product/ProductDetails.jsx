@@ -44,8 +44,8 @@ export default function ProductDetails() {
         <h3>Product Details</h3>
         {isLoading && <Loader />}
         {product && (
-          <div className="flex flex-cols w-full bg-slate-50 py-10 px-8 rounded-md shadow-md">
-            <div className="w-1/2">
+          <div className="flex flex-col sm:flex-row w-full bg-slate-50 py-10 px-8 rounded-md shadow-md gap-4">
+            <div className="sm:w-1/2">
               {product?.image ? (
                 <img
                   src={product.image.filePath}

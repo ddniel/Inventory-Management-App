@@ -42,8 +42,8 @@ export default function Contact() {
       <SideBar />
       <Layout>
         <h3>Contact Us</h3>
-        <div className="w-full bg-slate-50 py-10 px-8 rounded-md shadow-md flex flex-row mt-6">
-          <form onSubmit={sendEmail} className="w-1/2 flex flex-col gap-4">
+        <div className="w-full bg-slate-50 py-10 px-8 rounded-md shadow-md flex flex-col sm:flex-row mt-6 gap-4">
+          <form onSubmit={sendEmail} className="sm:w-1/2 flex flex-col gap-4">
             <input
               type="text"
               name="subject"

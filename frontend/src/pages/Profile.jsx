@@ -36,7 +36,7 @@ export default function Profile() {
             <p>Something went wrong, please reload...</p>
           ) : (
             <div className="w-full bg-slate-50 py-10 px-8 rounded-md shadow-md">
-              <div className="flex flex-row">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <div className="mr-20">
                   <span>
                     <img src={profile?.photo} alt="profile picture" />

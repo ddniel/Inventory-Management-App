@@ -34,7 +34,7 @@ export default function ProductSummary({ products }) {
   return (
     <div className="mb-8 w-full">
       <h3>Inventory Summary</h3>
-      <div className="grid grid-cols-2 w-[60%] gap-4 mt-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full gap-4 mt-6">
         <InfoCard
           icon={<BsFillCartCheckFill size={42} color="white" />}
           title={"Total Products"}

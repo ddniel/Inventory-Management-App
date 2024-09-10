@@ -17,7 +17,7 @@ export default function SideBar() {
   return (
     <div
       className={`${
-        isOpen ? "w-[25%]" : "w-[5%]"
+        isOpen ? "w-3/4 sm:w-[25%]" : "sm:w-[5%]"
       } bg-blue-600 py-10 duration-200`}
       style={{ boxShadow: "1px 1px 15px #888888" }}
     >
@@ -27,11 +27,11 @@ export default function SideBar() {
             <div className="flex items-center">
               <img
                 onClick={goHome}
-                className="w-10 cursor-pointer"
+                className=" w-10 cursor-pointer"
                 src={logo}
                 alt=""
               />
-              <h1 className="md:text-l font-medium pl-2 text-gray-100">
+              <h1 className="hidden sm:block md:text-l font-medium pl-2 text-gray-100">
                 Inventory<br></br> Management
               </h1>
             </div>
@@ -41,7 +41,7 @@ export default function SideBar() {
               onClick={handleToggle}
               color="white"
               size="30px"
-              className="cursor-pointer"
+              className=" cursor-pointer"
             />
           ) : (
             <RiMenuFold4Fill

@@ -41,6 +41,19 @@ app.get("/", (req, res) => {
   res.send("Hola Danito");
 });
 
+//-----To fix render refresh-----
+// Serve static files from the build directory (React app)
+app.use(express.static(path.join(__dirname, "build")));
+
+// Catch-all route to handle client-side routing for React
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+//------------------------------
+
+// Error Middleware
+app.use(errorHandler);
+
 //Error Middleware
 
 app.use(errorHandler);
